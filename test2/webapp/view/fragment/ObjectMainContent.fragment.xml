@@ -1,0 +1,63 @@
+<core:FragmentDefinition 
+    controllerName="test2.test2.controller.Object" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+	
+    <Table
+		id="itemstable"
+		width="auto"
+		items="{
+			path: 'productModel>/data',            
+			sorter: {
+				path: 'ProductID',
+				descending: false
+			}
+		}"
+		noDataText="{i18n>itemtableNoDataText}"		
+		growing="true"
+		growingScrollToLoad="true">
+
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>itemTableTitle}"/>				
+			</Toolbar>
+		</headerToolbar>
+
+		<columns>
+			<Column>
+				<Text text="{i18n>itemTableProductIdColumn}" />
+			</Column>
+            <Column>
+				<Text text="{i18n>itemTableUnitPriceColumn}"/>
+			</Column>
+            <Column>
+				<Text text="{i18n>itemTableQuantityColumn}"/>
+			</Column>
+			<Column hAlign="End">
+				<Text text="{i18n>itemTableDiscountColumn}"/>
+			</Column>
+		</columns>
+
+		<items>
+		    <ColumnListItem
+				type="Inactive">
+				<cells>
+                    <ObjectIdentifier
+						title="{productModel>ProductID}"
+                        />
+                    <Text
+				        text="{productModel>UnitPrice}"
+                        /> 
+                    <Text
+				        text="{productModel>Quantity}"
+                        />        
+					<ObjectNumber
+						number="{productModel>Discount}"
+                        state="Warning"
+                        />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

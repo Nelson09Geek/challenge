@@ -1,0 +1,94 @@
+<mvc:View
+	controllerName="test2.test2.controller.Object"
+	xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:layout="sap.ui.layout"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleHeading>
+			<Title text="{Customer/CompanyName}" />           
+		</semantic:titleHeading>
+
+        
+		<semantic:titleContent>
+            <ObjectAttribute title="Order ID" class="sapUiTinyMarginTop"  text="{OrderID}"/>            
+		</semantic:titleContent>
+
+		<semantic:headerContent>
+        	<layout:HorizontalLayout allowWrapping="true">
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+                 <layout:HorizontalLayout class="sapUiTinyMarginBottom">
+						<Label text="Contact Name:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/ContactName}"/>
+					</layout:HorizontalLayout>
+                     <layout:HorizontalLayout class="sapUiTinyMarginBottom" >
+						<Label text="Contact Title:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/ContactTitle}"/>
+					</layout:HorizontalLayout>
+                     <layout:HorizontalLayout class="sapUiTinyMarginBottom">
+						<Label text="Phone:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/Phone}"/>
+					</layout:HorizontalLayout>					
+				</layout:VerticalLayout>
+
+                <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                    <layout:HorizontalLayout class="sapUiTinyMarginBottom" >
+						<Label text="Address:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/Address}"/>
+					</layout:HorizontalLayout>
+                     <layout:HorizontalLayout class="sapUiTinyMarginBottom" >
+						<Label text="Postal Code / City:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/PostalCode} {Customer/City}"/>
+					</layout:HorizontalLayout>
+                     <layout:HorizontalLayout class="sapUiTinyMarginBottom">
+						<Label text="Country:" class="sapUiTinyMarginEnd"/>
+						<Text text="{Customer/Country}"/>
+					</layout:HorizontalLayout>
+				</layout:VerticalLayout>
+
+				<layout:VerticalLayout>
+					<ObjectAttribute title="Total Value"/>                      
+                    <ObjectNumber
+                        class="sapMObjectNumberLarge"                        
+                        number="{
+                                path:'productModel>/total',
+                                type: 'sap.ui.model.type.Integer',
+                                formatOptions: {showMeasure: false}
+                        }"
+                        unit="{productModel>/currency}"
+                        emphasized="false"
+			            state="None"  
+                    />                               					
+				</layout:VerticalLayout>
+			</layout:HorizontalLayout>			
+		</semantic:headerContent>
+
+        <!-- Main Content -->
+		<semantic:content>
+			<core:Fragment fragmentName="test2.test2.view.fragment.ObjectMainContent" type="XML" />
+		</semantic:content>
+		
+        <semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
+		</semantic:saveAsTileAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
